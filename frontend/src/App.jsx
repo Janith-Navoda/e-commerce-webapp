@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { Toaster } from "sonner";
 import Register from "./pages/Register";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route>{/*Admin Layout */}</Route>
       </Routes>

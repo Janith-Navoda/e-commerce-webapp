@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import PayPalButton from "./PayPalButton";
 const cart = {
   products: [
     {
@@ -36,8 +37,14 @@ const Checkout = () => {
 
   const handleCreateCheckout = (e) => {
     e.preventDefault();
-    //setCheckoutId(123);
+    setCheckoutId(123);
   };
+
+  const handlePaymentSuccess = (details) => {
+    console.log("Payment Successful", details);
+    navigate("/order-confirmation");
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto py-10 px-6 tracking-tighter">
       {/* Left Section */}
@@ -176,10 +183,36 @@ const Checkout = () => {
               <div>
                 <h3 className="text-lg mb-4">Pay with Paypal</h3>
                 {/* Paypal Component */}
+                <PayPalButton
+                  amount={100}
+                  onSuccess={handlePaymentSuccess}
+                  onError={(err) => alert("Payment failed. Try again")}
+                />
               </div>
             )}
           </div>
         </form>
+      </div>
+      {/* Right Section */}
+      <div className="bg-gray-50 p-6 rounded-lg">
+        <h3 className="text-lg mb-4">Order Summary</h3>
+        <div className="border-t py-4 mb-4">
+          {cart.products.map((product, index) => (
+            <div
+              key={index}
+              className="flex items-start justify-between py-2 border-b"
+            >
+              <div className="flex items-start">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-20 h-24 object-cover mr-4"
+                ></img>
+              </div>
+              
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

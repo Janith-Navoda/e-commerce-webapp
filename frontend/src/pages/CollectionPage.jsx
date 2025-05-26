@@ -35,7 +35,7 @@ const CollectionPage = () => {
   return () => {
     document.removeEventListener("mousedown", handleClickOutside);
   };
-}, [isSidebarOpen]);
+}, []);
 
 
   useEffect(() => {

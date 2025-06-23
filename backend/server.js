@@ -3,6 +3,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const { connect } = require("mongoose");
+const userRoutes = require("./routes/userRoutes");
+
 
 const app = express();
 app.use(express.json());
@@ -18,6 +20,9 @@ connectDB();
 app.get("/", (req, res) => {
   res.send("WELCOME TO THE BACKEND API!");
 });
+
+// API Routes
+app.use("/api/users", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);

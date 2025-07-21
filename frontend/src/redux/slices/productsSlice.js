@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { create } from "../../../../backend/models/Order";
 
 // Async Thunk to Fetch Products by Collection and optional Filters
 export const fetchProductsByFilters = createAsyncThunk(
@@ -175,7 +174,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchSimilarProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = action.payload;
+        state.similarProducts = action.payload;
       })
       .addCase(fetchSimilarProducts.rejected, (state, action) => {
         state.loading = false;

@@ -4,12 +4,12 @@ import axios from "axios";
 // fetch all users (admin only)
 export const fetchUsers = createAsyncThunk("admin/fetchUsers", async () => {
   const response = await axios.get(
-    `${import.meta.VITE_BACKEND_URL}/api/admin/users`,
+    `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
     {
       headers: { Authorization: `Bearer ${localStorage.getItem("userToken")}` },
     }
   );
-  response.data;
+  return response.data;
 });
 
 // Add the create user action
@@ -46,7 +46,7 @@ export const updateUser = createAsyncThunk(
         },
       }
     );
-    response.data;
+    return response.data.user;
   }
 );
 
@@ -86,6 +86,7 @@ const adminSlice = createSlice({
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         const updatedUser = action.payload;
+
         const userIndex = state.users.findIndex(
           (user) => user._id === updatedUser._id
         );
